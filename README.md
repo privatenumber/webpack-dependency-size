@@ -31,7 +31,7 @@ module.exports = {
 		// 2. Add to plugins array
 		new DependencySize({
 			// Options
-		}),
+		})
 	]
 };
 ```
