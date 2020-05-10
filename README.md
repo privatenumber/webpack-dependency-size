@@ -45,9 +45,9 @@ module.exports = {
 ## Output
 
 ### Schema
-- `[package path]` bundled-in package (sorted by size)
+- `[package path]` bundled-in package (sorted by `size`)
   - `size` human-readable net import size from package
-  - `files` specific files imported from the package (sorted by size)
+  - `files` specific files imported from the package (sorted by `size`)
     - `filepath` bundled-in file
     - `size` human-readable size
     - `reasons` request sources
