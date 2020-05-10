@@ -10,7 +10,7 @@
 ## :raising_hand: Why?
 - 📦 **Only Dependencies** Get insight into the blackbox!
 - 🔥 **Fast** Only analyzes the bare minium!
-- 👀 **JSON Output** Pre-formatted and portable!
+- 👀 **JSON Output** Formatted, sorted, and portable!
 - 🙈 **No distractions** Ignore application code!
 
 ## :rocket: Install
@@ -45,9 +45,9 @@ module.exports = {
 ## Output
 
 ### Schema
-- `[package path]` bundled-in package
+- `[package path]` bundled-in package (sorted by size)
   - `size` human-readable net import size from package
-  - `files`
+  - `files` specific files imported from the package (sorted by size)
     - `filepath` bundled-in file
     - `size` human-readable size
     - `reasons` request sources
