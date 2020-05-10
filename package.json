@@ -1,0 +1,21 @@
+{
+  "name": "webpack-dependency-size",
+  "version": "1.0.0",
+  "description": "Webpack plugin to get an overview of bundled dependencies and their size",
+  "main": "index.js",
+  "dependencies": {
+    "filesize": "^6.1.0",
+    "gzip-size": "^5.1.1",
+    "lodash": "^4.17.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/privatenumber/webpack-dependency-size.git"
+  },
+  "author": "Hiroki Osame <hiroki.osame@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/privatenumber/webpack-dependency-size/issues"
+  },
+  "homepage": "https://github.com/privatenumber/webpack-dependency-size#readme"
+}
