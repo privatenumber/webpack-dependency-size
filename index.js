@@ -44,7 +44,7 @@ class DependencySizePlugin {
 	constructor({
 		outputPath = 'dependency-size.json',
 		gzip = false,
-		indent = '\t',
+		indent = '  ',
 	} = {}) {
 		this.outputPath = outputPath;
 		this.gzip = gzip;
