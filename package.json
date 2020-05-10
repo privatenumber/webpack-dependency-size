@@ -1,6 +1,6 @@
 {
   "name": "webpack-dependency-size",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Webpack plugin to get an overview of bundled dependencies and their size",
   "keywords": [
     "webpack",
@@ -8,7 +8,9 @@
     "dependency",
     "size"
   ],
-  "files": ["index.js"],
+  "files": [
+    "index.js"
+  ],
   "main": "index.js",
   "dependencies": {
     "filesize": "^6.1.0",
