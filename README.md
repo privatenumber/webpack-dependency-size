@@ -18,7 +18,7 @@
 npm i webpack-dependency-size
 ```
 
-## Basic Usage
+## 👩‍🏫 Basic Usage
 In your Webpack config:
 ```js
 // 1. Import plugin
@@ -42,7 +42,7 @@ module.exports = {
 - `gzip` (`false`) Calculate gzipped size
 - `indent` (2 spaces) JSON output indentation
 
-## Output
+## 📋 Output
 
 ### Schema
 - `[package path]` bundled-in package (sorted by `size`)
@@ -89,5 +89,5 @@ module.exports = {
 }
 ```
 
-## License
+## 💼 License
 MIT
