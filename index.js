@@ -75,7 +75,12 @@ class DependencySizePlugin {
 					} else if (Array.isArray(m.modules)) {
 						size = m.modules.reduce((s, m) => (s + gzipSize.sync(m.source)), 0);
 					} else {
-						console.warn(`Failed to calculate gzip size for "${filepath}". Using original size ${filesize(size)}.`);
+						try {
+							const fsSource = fs.readFileSync(path.resolve(this.compiler.context, filepath));
+							size = gzipSize.sync(fsSource);
+						} catch (err) {
+							console.warn(`Failed to calculate gzip size for "${filepath}". Using original size ${filesize(size)}.`);
+						}
 					}
 				}
 
