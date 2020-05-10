@@ -64,12 +64,28 @@ class DependencySizePlugin {
 
 	getDependencyModules({ modules }) {
 		return modules
-			.map((m) => ({
-				filepath: getFilepath(m.name),
-				size: this.gzip ? gzipSize.sync(m.source) : m.size,
-				reasons: _.uniq(m.reasons.map(r => getFilepath(r.moduleName))).sort(),
-			}))
-			.filter((m) => m.filepath.startsWith('./node_modules/'));
+			.map((m) => {
+				const filepath = getFilepath(m.name);
+				if (!filepath.startsWith('./node_modules/')) { return; }
+
+				let { size } = m;
+				if (this.gzip) {
+					if (typeof m.source === 'string') {
+						size = gzipSize.sync(m.source);
+					} else if (Array.isArray(m.modules)) {
+						size = m.modules.reduce((s, m) => (s + gzipSize.sync(m.source)), 0);
+					} else {
+						console.warn(`Failed to calculate gzip size for "${filepath}". Using original size ${filesize(size)}.`);
+					}
+				}
+
+				return {
+					filepath,
+					size,
+					reasons: _.uniq(m.reasons.map(r => getFilepath(r.moduleName))).sort(),
+				};
+			})
+			.filter((m) => m);
 	}
 
 	analyzeStats(stats, cb = _.noop) {
