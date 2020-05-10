@@ -53,6 +53,9 @@ module.exports = {
     - `reasons` request sources
 
 ### Example
+
+> Tip: If the output is too large, I recommend using [fx](https://github.com/antonmedv/fx) to navigate the JSON
+
 ```json5
 {
   "./node_modules/axios": {
