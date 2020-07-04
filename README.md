@@ -35,10 +35,11 @@ module.exports = {
 ```
 
 ### Options
-Pass in an options object to configure it:
+Pass in an options object to configure:
 ```js
 new DependencySize({
 	// Options
+	gzip: true
 })
 ```
 - `outputPath` (`dependency-size.json`) JSON output path relative to Webpack output directory (`output.path`)
