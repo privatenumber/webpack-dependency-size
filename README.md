@@ -29,15 +29,18 @@ module.exports = {
 
 	plugins: [
 		// 2. Add to plugins array
-		new DependencySize({
-			// Options
-		})
+		new DependencySize()
 	]
 };
 ```
 
 ### Options
-
+Pass in an options object to configure it:
+```js
+new DependencySize({
+	// Options
+})
+```
 - `outputPath` (`dependency-size.json`) JSON output path relative to Webpack output directory (`output.path`)
 - `gzip` (`false`) Calculate gzipped size
 - `indent` (2 spaces) JSON output indentation
