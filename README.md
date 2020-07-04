@@ -15,7 +15,7 @@
 
 ## :rocket: Install
 ```sh
-npm i webpack-dependency-size
+npm i -D webpack-dependency-size
 ```
 
 ## 👩‍🏫 Basic Usage
