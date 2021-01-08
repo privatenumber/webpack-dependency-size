@@ -1,19 +1,19 @@
 dependencies:
-  filesize: 6.1.0
+  byte-size: 7.0.0
   gzip-size: 6.0.0
   lodash: 4.17.20
 lockfileVersion: 5.2
 packages:
+  /byte-size/7.0.0:
+    dev: false
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-NNiBxKgxybMBtWdmvx7ZITJi4ZG+CYUgwOSZTfqB1qogkRHrhbQE/R2r5Fh94X+InN5MCYz6SvB/ejHMj/HbsQ==
   /duplexer/0.1.2:
     dev: false
     resolution:
       integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==
-  /filesize/6.1.0:
-    dev: false
-    engines:
-      node: '>= 0.4.0'
-    resolution:
-      integrity: sha512-LpCHtPQ3sFx67z+uh2HnSyWSLLu5Jxo21795uRDuar/EOuYWXib5EmPaGIBuSnRqH2IODiKA2k5re/K9OnN/Yg==
   /gzip-size/6.0.0:
     dependencies:
       duplexer: 0.1.2
@@ -27,6 +27,6 @@ packages:
     resolution:
       integrity: sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 specifiers:
-  filesize: ^6.1.0
+  byte-size: ^7.0.0
   gzip-size: ^6.0.0
   lodash: ^4.17.20

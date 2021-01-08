@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
-const filesize = require('filesize');
+const byteSize = require('byte-size');
 const gzipSize = require('gzip-size');
 
 // Strips loaders (!) and " + n modules" suffix
@@ -79,7 +79,7 @@ class DependencySizePlugin {
 							const fsSource = fs.readFileSync(path.resolve(this.compiler.context, filepath));
 							size = gzipSize.sync(fsSource);
 						} catch (err) {
-							console.warn(`Failed to calculate gzip size for "${filepath}". Using original size ${filesize(size)}.`);
+							console.warn(`Failed to calculate gzip size for "${filepath}". Using original size ${byteSize(size)}.`);
 						}
 					}
 				}
@@ -120,11 +120,11 @@ class DependencySizePlugin {
 			.toPairs()
 			.orderBy(['1.size'], ['desc'])
 			.map((dep) => {
-				dep[1].size = filesize(dep[1].size);
+				dep[1].size = byteSize(dep[1].size).toString();
 				dep[1].files
 					.sort((a, b) => b.size - a.size)
 					.forEach((f) => {
-						f.size = filesize(f.size);
+						f.size = byteSize(f.size).toString();
 					});
 
 				return dep;
