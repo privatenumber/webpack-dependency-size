@@ -1,26 +1,26 @@
 {
-  "name": "webpack-dependency-size",
-  "version": "0.0.2",
-  "description": "Track/evaluate dependencies bundled into a Webpack build",
-  "keywords": [
-    "webpack",
-    "analyzer",
-    "dependency",
-    "size"
-  ],
-  "license": "MIT",
-  "repository": "privatenumber/webpack-dependency-size",
-  "author": {
-    "name": "Hiroki Osame",
-    "email": "hiroki.osame@gmail.com"
-  },
-  "files": [
-    "index.js"
-  ],
-  "main": "index.js",
-  "dependencies": {
-    "filesize": "^6.1.0",
-    "gzip-size": "^6.0.0",
-    "lodash": "^4.17.20"
-  }
+	"name": "webpack-dependency-size",
+	"version": "0.0.2",
+	"description": "Track/evaluate dependencies bundled into a Webpack build",
+	"keywords": [
+		"webpack",
+		"analyzer",
+		"dependency",
+		"size"
+	],
+	"license": "MIT",
+	"repository": "privatenumber/webpack-dependency-size",
+	"author": {
+		"name": "Hiroki Osame",
+		"email": "hiroki.osame@gmail.com"
+	},
+	"files": [
+		"index.js"
+	],
+	"main": "index.js",
+	"dependencies": {
+		"filesize": "^6.1.0",
+		"gzip-size": "^6.0.0",
+		"lodash": "^4.17.20"
+	}
 }
