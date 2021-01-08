@@ -66,7 +66,7 @@ class DependencySizePlugin {
 		return modules
 			.map((m) => {
 				const filepath = getFilepath(m.name);
-				if (!filepath.startsWith('./node_modules/')) { return; }
+				if (!ptrn.test(filepath)) { return; }
 
 				let { size } = m;
 				if (this.gzip) {
