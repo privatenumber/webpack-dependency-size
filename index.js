@@ -119,17 +119,19 @@ class DependencySizePlugin {
 		deps = _(deps)
 			.toPairs()
 			.orderBy(['1.size'], ['desc'])
-			.map((dep) => {
-				dep[1].size = byteSize(dep[1].size).toString();
-				dep[1].files
+			.map(([dependencyPath, depData]) => {
+				depData.files
 					.sort((a, b) => b.size - a.size)
 					.forEach((f) => {
 						f.size = byteSize(f.size).toString();
 					});
 
-				return dep;
+				return {
+					dependencyPath,
+					size: byteSize(depData.size).toString(),
+					files: depData.files,
+				};
 			})
-			.fromPairs()
 			.value();
 
 		this.writeData(deps, cb);
