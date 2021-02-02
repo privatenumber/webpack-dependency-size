@@ -49,12 +49,19 @@ new DependencySize({
 ## 📋 Output
 
 ### Schema
-- `[package path]` bundled-in package (sorted by `size`)
-  - `size` human-readable net import size from package
-  - `files` specific files imported from the package (sorted by `size`)
-    - `filepath` bundled-in file
-    - `size` human-readable size
-    - `reasons` request sources
+```js
+type File = {
+    filepath: string; // bundled-in file
+    size: string; // human-readable size
+    reasons: string[]; // request sources
+};
+
+type Report = {
+    dependencyPath: string; // bundled-in package (sorted by `size`)
+    size: string; // human-readable net import size from package
+    files: File[]; // specific files imported from the package (sorted by `size`)
+}[];
+```
 
 ### Example
 
