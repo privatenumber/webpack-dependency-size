@@ -95,5 +95,11 @@ new DependencySize({
 ]
 ```
 
+## 👨‍👩‍👦‍👦 Related
+
+- [webpack-distsize](https://github.com/privatenumber/webpack-distsize) - Track Webpack output size via version control
+- [webpack-analyze-duplication-plugin](https://github.com/privatenumber/webpack-analyze-duplication-plugin) - Webpack plugin to detect duplicated modules
+
+
 ## 💼 License
 MIT
