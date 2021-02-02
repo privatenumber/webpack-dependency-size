@@ -1,15 +1,18 @@
 {
 	"name": "webpack-dependency-size",
-	"version": "0.0.3",
+	"version": "0.0.0-semantic-release",
 	"description": "Track/evaluate dependencies bundled into a Webpack build",
 	"keywords": [
 		"webpack",
-		"analyzer",
 		"dependency",
-		"size"
+		"size",
+		"analysis",
+		"analyze",
+		"report"
 	],
 	"license": "MIT",
 	"repository": "privatenumber/webpack-dependency-size",
+	"funding": "https://github.com/privatenumber/webpack-dependency-size?sponsor=1",
 	"author": {
 		"name": "Hiroki Osame",
 		"email": "hiroki.osame@gmail.com"
