@@ -61,8 +61,9 @@ new DependencySize({
 > Tip: If the output is too large, I recommend using [fx](https://github.com/antonmedv/fx) to navigate the JSON
 
 ```json5
-{
-  "./node_modules/axios": {
+[
+  {
+    "dependencyPath": "./node_modules/axios",
     "size": "40.15 KB",
     "files": [
       {
@@ -76,7 +77,8 @@ new DependencySize({
       ...
     ]
   },
-  "./node_modules/lodash": {
+  {
+    "dependencyPath": "./node_modules/lodash",
     "size": "25.37 KB",
     "files": [
       {
@@ -90,8 +92,14 @@ new DependencySize({
     ]
   },
   ...
-}
+]
 ```
+
+## 👨‍👩‍👦‍👦 Related
+
+- [webpack-distsize](https://github.com/privatenumber/webpack-distsize) - Track Webpack output size via version control
+- [webpack-analyze-duplication-plugin](https://github.com/privatenumber/webpack-analyze-duplication-plugin) - Webpack plugin to detect duplicated modules
+
 
 ## 💼 License
 MIT

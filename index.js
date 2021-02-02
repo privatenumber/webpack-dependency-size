@@ -8,10 +8,10 @@ const gzipSize = require('gzip-size');
 const getFilepath = name => name && name.split('!').pop().replace(/ \+.+$/, '');
 
 // Gets the dependency name
-const ptrn = /^(.*node_modules\/(@[^\/]+\/)?[^\/]+)/;
+const ptrn = /^(.*node_modules\/(@[^/]+\/)?[^/]+)/;
 const getDepName = filepath => _.head(filepath.match(ptrn));
 
-const statsOpts = {
+const statsOptions = {
 	assets: false,
 	builtAt: false,
 	moduleAssets: false,
@@ -40,7 +40,6 @@ const statsOpts = {
 };
 
 class DependencySizePlugin {
-
 	constructor({
 		outputPath = 'dependency-size.json',
 		gzip = false,
@@ -64,21 +63,27 @@ class DependencySizePlugin {
 
 	getDependencyModules({ modules }) {
 		return modules
-			.map((m) => {
-				const filepath = getFilepath(m.name);
-				if (!ptrn.test(filepath)) { return; }
+			.map((_module) => {
+				const filepath = getFilepath(_module.name);
+				if (!ptrn.test(filepath)) {
+					return;
+				}
 
-				let { size } = m;
+				let { size } = _module;
 				if (this.gzip) {
-					if (typeof m.source === 'string') {
-						size = gzipSize.sync(m.source);
-					} else if (Array.isArray(m.modules)) {
-						size = m.modules.reduce((s, m) => (s + gzipSize.sync(m.source)), 0);
+					if (typeof _module.source === 'string') {
+						size = gzipSize.sync(_module.source);
+					} else if (Array.isArray(_module.modules)) {
+						// eslint-disable-next-line unicorn/no-reduce
+						size = _module.modules.reduce(
+							(totalSize, { source }) => totalSize + gzipSize.sync(source),
+							0,
+						);
 					} else {
 						try {
 							const fsSource = fs.readFileSync(path.resolve(this.compiler.context, filepath));
 							size = gzipSize.sync(fsSource);
-						} catch (err) {
+						} catch {
 							console.warn(`Failed to calculate gzip size for "${filepath}". Using original size ${byteSize(size)}.`);
 						}
 					}
@@ -87,59 +92,61 @@ class DependencySizePlugin {
 				return {
 					filepath,
 					size,
-					reasons: _.uniq(m.reasons.map(r => getFilepath(r.moduleName))).sort(),
+					reasons: _.uniq(_module.reasons.map(r => getFilepath(r.moduleName))).sort(),
 				};
 			})
-			.filter((m) => m);
+			.filter(Boolean);
 	}
 
-	analyzeStats(stats, cb = _.noop) {
+	analyzeStats(stats, callback = _.noop) {
 		const statsJson = stats.toJson({
-			...statsOpts,
+			...statsOptions,
 			source: this.gzip,
 		});
 
-		let deps = this.getDependencyModules(statsJson)
-			.reduce((deps, m) => {
-				const depName = getDepName(m.filepath);
+		const dependencyModules = this.getDependencyModules(statsJson);
+		const groupedDependencyModules = {};
+		dependencyModules.forEach((m) => {
+			const depName = getDepName(m.filepath);
 
-				if (!deps[depName]) {
-					deps[depName] = {
-						size: 0,
-						files: [],
-					};
-				}
+			if (!groupedDependencyModules[depName]) {
+				groupedDependencyModules[depName] = {
+					size: 0,
+					files: [],
+				};
+			}
 
-				deps[depName].size += m.size;
-				deps[depName].files.push(m);
+			groupedDependencyModules[depName].size += m.size;
+			groupedDependencyModules[depName].files.push(m);
+		});
 
-				return deps;
-			}, {});
-
-		deps = _(deps)
+		const dependencyReport = _(groupedDependencyModules)
 			.toPairs()
 			.orderBy(['1.size'], ['desc'])
-			.map((dep) => {
-				dep[1].size = byteSize(dep[1].size).toString();
-				dep[1].files
+			.map(([dependencyPath, depData]) => {
+				depData.files
 					.sort((a, b) => b.size - a.size)
 					.forEach((f) => {
 						f.size = byteSize(f.size).toString();
 					});
 
-				return dep;
+				return {
+					dependencyPath,
+					size: byteSize(depData.size).toString(),
+					files: depData.files,
+				};
 			})
-			.fromPairs()
 			.value();
 
-		this.writeData(deps, cb);
+		this.writeData(dependencyReport, callback);
 	}
 
-	writeData(data, cb) {
+	writeData(data, callback) {
+		// eslint-disable-next-line node/prefer-promises/fs
 		fs.writeFile(
 			path.resolve(this.compiler.outputPath, this.outputPath),
 			JSON.stringify(data, null, this.indent),
-			cb
+			callback,
 		);
 	}
 }
